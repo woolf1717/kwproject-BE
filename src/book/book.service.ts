@@ -52,7 +52,12 @@ export class BookService {
     return `This action updates a #${id} book`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} book`;
+  async remove(id: number) {
+    const books = await this.bookRepository.find();
+
+    const foundBook = books.find((book) => book.id === id);
+    const book = await this.bookRepository.remove(foundBook);
+
+    return book;
   }
 }
