@@ -32,6 +32,11 @@ export class BookController {
     return this.bookService.findOne(+id);
   }
 
+  @Get('compare/:id1/:id2')
+  compare(@Param('id1') id1: string, @Param('id2') id2: string) {
+    return this.bookService.compare(+id1, +id2);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateBookDto: UpdateBookDto) {
     return this.bookService.update(+id, updateBookDto);

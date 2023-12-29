@@ -13,3 +13,17 @@ export type CreateBookType = {
   bookNumber: string;
   controlNumber: string;
 };
+
+export type BookType = {
+  id: number;
+  departmentCode: string;
+  bookNumber: string;
+  controlNumber: string;
+  title: string;
+  sectionZero: string;
+  sectionOneDesignation: string;
+  sectionOneRightsList: string;
+  sectionTwo: string;
+  sectionThree: string;
+  sectionFour: string;
+};
