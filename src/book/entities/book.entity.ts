@@ -13,4 +13,5 @@ export class Book {
   sectionTwo: string;
   sectionThree: string;
   sectionFour: string;
+  isMonitored: boolean;
 }

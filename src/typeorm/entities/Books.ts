@@ -34,4 +34,7 @@ export class Book {
 
   @Column('longtext')
   sectionFour: string;
+
+  @Column('boolean', { default: false })
+  isMonitored: boolean = false;
 }

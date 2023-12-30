@@ -6,6 +6,7 @@ import { CreateBookType } from 'src/utils/types';
 import { Book } from 'src/typeorm/entities/Books';
 import { bookScraper } from '../utils/bookScraper';
 import { compareBooks } from 'src/utils/compareBooks';
+import { SetMonitoredDto } from './dto/set-monitored.dto';
 
 @Injectable()
 export class BookService {
@@ -14,8 +15,6 @@ export class BookService {
   ) {}
 
   async create(createBookDto: CreateBookType) {
-    // console.log(createBookDto);
-
     const currentBookState = await bookScraper(
       createBookDto['departmentCode'],
       createBookDto['bookNumber'],
@@ -23,6 +22,22 @@ export class BookService {
     );
 
     return this.bookRepository.save(currentBookState);
+  }
+
+  async setMonitored(data: SetMonitoredDto) {
+    const books = await this.bookRepository.find();
+    console.log(data, data.id);
+    const foundBook = books.find((book) => {
+      return book.id === data.id;
+    });
+
+    console.log(foundBook.isMonitored);
+
+    const updatedBook = await this.bookRepository.update(data.id, {
+      isMonitored: !foundBook.isMonitored,
+    });
+
+    return updatedBook;
   }
 
   async findAll() {

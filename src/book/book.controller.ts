@@ -10,6 +10,7 @@ import {
 import { BookService } from './book.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
+import { SetMonitoredDto } from './dto/set-monitored.dto';
 
 @Controller('book')
 export class BookController {
@@ -18,6 +19,11 @@ export class BookController {
   @Post()
   create(@Body() createBookDto: CreateBookDto) {
     return this.bookService.create(createBookDto);
+  }
+
+  @Post('monitored')
+  setMonitored(@Body() data: SetMonitoredDto) {
+    return this.bookService.setMonitored(data);
   }
 
   @Get()

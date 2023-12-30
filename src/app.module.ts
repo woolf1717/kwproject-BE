@@ -1,9 +1,12 @@
 import { Book } from './typeorm/entities/Books';
 import { BookModule } from './book/book.module';
+import { EmailModule } from './email/email.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 import { Module } from '@nestjs/common';
 import { Profile } from './typeorm/entities/Profile';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './typeorm/entities/User';
+import { UserModule } from './user/user.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -20,6 +23,9 @@ import { UsersModule } from './users/users.module';
     }),
     UsersModule,
     BookModule,
+    EmailModule,
+    EventEmitterModule.forRoot(),
+    UserModule,
   ],
   controllers: [],
   providers: [],
