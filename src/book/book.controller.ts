@@ -28,7 +28,10 @@ export class BookController {
 
   @Get()
   findAll() {
-    //only return the id, departmentCode, bookNumber, and controlNumber
+    return this.bookService.findAll();
+  }
+  @Get('full')
+  findAllFull() {
     return this.bookService.findAll();
   }
 

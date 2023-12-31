@@ -9,6 +9,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   imports: [TypeOrmModule.forFeature([Book])],
   controllers: [BookController],
   providers: [BookService],
+  exports: [BookService],
 })
 export class BookModule implements NestModule {
   configure() {}

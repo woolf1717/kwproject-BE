@@ -4,25 +4,39 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/typeorm/entities/User';
 
+type ExampleUser = {
+  userId: number;
+  username: string;
+  password: string;
+};
+
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
   ) {}
 
-  private fakeUsers = [
-    { username: 'fake', email: 'user' },
-    { username: 'fake2', email: 'user2' },
-    { username: 'fake3', email: 'user3' },
+  private readonly users = [
+    {
+      userId: 1,
+      username: 'john',
+      password: 'changeme',
+    },
+    {
+      userId: 2,
+      username: 'maria',
+      password: 'guess',
+    },
   ];
+
+  async findOne(username: string): Promise<ExampleUser | undefined> {
+    return this.users.find((user) => user.username === username);
+  }
 
   findUsers() {
     return this.userRepository.find();
   }
 
-  fetchUsers() {
-    return this.fakeUsers;
-  }
   createUser(userDetails: CreateUserType) {
     const newUser = this.userRepository.create({
       ...userDetails,

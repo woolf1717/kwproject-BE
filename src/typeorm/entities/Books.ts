@@ -37,4 +37,7 @@ export class Book {
 
   @Column('boolean', { default: false })
   isMonitored: boolean = false;
+
+  @Column('boolean', { default: false })
+  isAfterChanges: boolean = false;
 }

@@ -1,4 +1,3 @@
-import parse from 'html-react-parser';
 import puppeteer from 'puppeteer';
 
 const url =
@@ -11,7 +10,6 @@ export const bookScraper = async (
 ) => {
   const navFix = (content) => {
     const oldNav = /<table id="nawigacja">[\s\S]*?<\/table>/;
-    const newNav = `<table id="nawigacja"><tbody><tr><td><form method="get" action="./okladka.html"><input value="Okładka" type="submit"></form></td><td><form method="get" action="./dział1-0.html"><input value="Dział I-O" type="submit"></form></td><td><form method="get" action="./dział1-Sp.html"><input value="Dział I-Sp" type="submit"></form></td><td><form method="get" action="./dział2.html"><input value="Dział II" type="submit"></form></td><td><form method="get" action="./dział3.html"><input value="Dział III" type="submit"></form></td><td><form method="get" action="./dział4.html"><input value="Dział IV" type="submit"></form></td></tr></tbody></table>`;
 
     const oldReturnButton = /<table width="100%">[\s\S]*?<\/table>/;
     const newReturnButton =

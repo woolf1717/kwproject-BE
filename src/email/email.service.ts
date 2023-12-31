@@ -10,7 +10,21 @@ export class EmailService {
 
   async welcomeEmailPlain({ user, book }: CreateEmailDto) {
     await this.mailerService.sendMail({
-      // to:email
+      to: 'barstpiczynski@gmail.com',
+      subject: 'Welcome to Company',
+      template: './confirmation',
+      text: 'Welcome to Company',
+
+      context: {
+        user: user,
+        book: book,
+      },
+    });
+    return 'Email sent';
+  }
+
+  async isDifferentBookEmail({ user, book }: CreateEmailDto) {
+    await this.mailerService.sendMail({
       to: 'barstpiczynski@gmail.com',
       subject: 'Welcome to Company',
       template: './confirmation',
@@ -39,6 +53,7 @@ export class EmailService {
       },
     });
   }
+
   @OnEvent('user.reset-password')
   async forgotPasswordEmail(data: EventPayloads['user.reset-password']) {
     const { name, email, link } = data;

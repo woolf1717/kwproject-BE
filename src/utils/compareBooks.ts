@@ -1,9 +1,11 @@
 import { BookType } from './types';
 
+type BookTypeNoID = Omit<BookType, 'id'>;
+
 export function compareBooks(
-  bookOne: BookType,
-  bookTwo: BookType,
-): { message: string } {
+  bookOne: BookType | BookTypeNoID,
+  bookTwo: BookType | BookTypeNoID,
+): { message: string; isDifferent: boolean } {
   const identicalPages = [];
   const differentPages = [];
 
@@ -43,34 +45,8 @@ export function compareBooks(
   }
 
   if (differentPages.length === 0) {
-    return { message: 'The books are identical' };
+    return { message: 'The books are identical', isDifferent: false };
   } else {
-    return { message: 'The books are different' };
+    return { message: 'The books are different', isDifferent: true };
   }
 }
-
-// function getTextBetweenTags(html) {
-//   const $ = cheerio.load(html);
-//   const textContent = [];
-
-//   $('*').each((index, element: any) => {
-//     const tagName = element.tagName;
-//     const tagText = $(element).prop('innerText').trim();
-
-//     // Exclude text within <script> tags
-//     if (tagName.toLowerCase() === 'script') {
-//       return;
-//     }
-//     if (
-//       tagName.toLowerCase() === 'h2' &&
-//       tagText.includes('TREŚĆ KSIĘGI WIECZYSTEJ NR')
-//     ) {
-//       return;
-//     }
-//     if (tagText) {
-//       textContent.push(tagText);
-//     }
-//   });
-
-//   return textContent.join('\n');
-// }

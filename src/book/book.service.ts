@@ -7,6 +7,7 @@ import { Book } from 'src/typeorm/entities/Books';
 import { bookScraper } from '../utils/bookScraper';
 import { compareBooks } from 'src/utils/compareBooks';
 import { SetMonitoredDto } from './dto/set-monitored.dto';
+import { CreateBookPlainDto } from './dto/create-book-plain.dto';
 
 @Injectable()
 export class BookService {
@@ -24,14 +25,16 @@ export class BookService {
     return this.bookRepository.save(currentBookState);
   }
 
+  async createPlain(currentBookState: CreateBookPlainDto) {
+    return this.bookRepository.save(currentBookState);
+  }
+
   async setMonitored(data: SetMonitoredDto) {
     const books = await this.bookRepository.find();
     console.log(data, data.id);
     const foundBook = books.find((book) => {
       return book.id === data.id;
     });
-
-    console.log(foundBook.isMonitored);
 
     const updatedBook = await this.bookRepository.update(data.id, {
       isMonitored: !foundBook.isMonitored,
@@ -48,9 +51,15 @@ export class BookService {
           departmentCode: book.departmentCode,
           bookNumber: book.bookNumber,
           controlNumber: book.controlNumber,
+          isMonitored: book.isMonitored,
         };
       }
     });
+
+    return books;
+  }
+  async findAllFull() {
+    const books = await this.bookRepository.find();
 
     return books;
   }

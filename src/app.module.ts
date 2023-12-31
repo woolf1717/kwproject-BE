@@ -4,10 +4,13 @@ import { EmailModule } from './email/email.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { Module } from '@nestjs/common';
 import { Profile } from './typeorm/entities/Profile';
+import { ScheduleModule } from '@nestjs/schedule';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './typeorm/entities/User';
 import { UserModule } from './user/user.module';
 import { UsersModule } from './users/users.module';
+import { TasksModule } from './tasks/tasks.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -26,6 +29,9 @@ import { UsersModule } from './users/users.module';
     EmailModule,
     EventEmitterModule.forRoot(),
     UserModule,
+    ScheduleModule.forRoot(),
+    TasksModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
